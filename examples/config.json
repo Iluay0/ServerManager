@@ -10,5 +10,35 @@
             "LoginServer.exe",
             "WorldServer.exe"
         ]
-    }
+    },
+	"copy": [
+		{
+			"from": "../../Source/bin/AccountServer.exe",
+			"to": "../Program/AccountServer.exe"
+		},
+		{
+			"from": "../../Source/bin/Certifier.exe",
+			"to": "../Program/Certifier.exe"
+		},
+		{
+			"from": "../../Source/bin/DatabaseServer.exe",
+			"to": "../Program/DatabaseServer.exe"
+		},
+		{
+			"from": "../../Source/bin/CoreServer.exe",
+			"to": "../Program/CoreServer.exe"
+		},
+		{
+			"from": "../../Source/bin/CacheServer.exe",
+			"to": "../Program/CacheServer.exe"
+		},
+		{
+			"from": "../../Source/bin/LoginServer.exe",
+			"to": "../Program/LoginServer.exe"
+		},
+		{
+			"from": "../../Source/bin/WorldServer.exe",
+			"to": "../Program/WorldServer.exe"
+		}
+	]
 }
