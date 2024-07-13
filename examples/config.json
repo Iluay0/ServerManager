@@ -1,0 +1,14 @@
+{
+    "dbInstanceName": ".\\SQLEXPRESS",
+    "executables": {
+        "../Program": [
+            "AccountServer.exe",
+            "Certifier.exe",
+            "DatabaseServer.exe",
+            "CoreServer.exe",
+            "CacheServer.exe",
+            "LoginServer.exe",
+            "WorldServer.exe"
+        ]
+    }
+}

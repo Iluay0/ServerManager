@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{c4f52f86-6f41-4f32-a006-7d3e3ae22310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{5cf87c5e-01af-4606-8b43-398be3248ae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib\color-console">
+      <UniqueIdentifier>{9b6516b6-14c4-4b8d-92a3-620a56dd4698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DbModule">
+      <UniqueIdentifier>{b68e65c9-be53-499d-a433-5546e070f21f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DbModule\MigrationModule">
+      <UniqueIdentifier>{d917920f-3093-493e-a44c-7317f684853b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DbModule\InstanceModule">
+      <UniqueIdentifier>{b41516c2-68e6-46fb-9ab4-ac29ff90c904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainModule">
+      <UniqueIdentifier>{fb248391-4bc6-4532-b989-d2068b0ff843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ProcessModule">
+      <UniqueIdentifier>{3c0a3529-6279-42d2-ada2-e5379af9b43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib\json">
+      <UniqueIdentifier>{cf733ec6-8d49-49e5-9c6a-1fea4e65ce8f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ServerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DbModule\MigrationModule\MigrationModule.cpp">
+      <Filter>Source Files\DbModule\MigrationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DbModule\InstanceModule\InstanceModule.cpp">
+      <Filter>Source Files\DbModule\InstanceModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainModule\MainModule.cpp">
+      <Filter>Source Files\MainModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProcessModule\ProcessModule.cpp">
+      <Filter>Source Files\ProcessModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DbModule\DbModule.cpp">
+      <Filter>Source Files\DbModule</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Util\Util.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lib\color-console\color.hpp">
+      <Filter>Source Files\Lib\color-console</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DbModule\MigrationModule\MigrationModule.h">
+      <Filter>Source Files\DbModule\MigrationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DbModule\InstanceModule\InstanceModule.h">
+      <Filter>Source Files\DbModule\InstanceModule</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainModule\MainModule.h">
+      <Filter>Source Files\MainModule</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProcessModule\ProcessModule.h">
+      <Filter>Source Files\ProcessModule</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputModule.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DbModule\DbModule.h">
+      <Filter>Source Files\DbModule</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lib\json\json.hpp">
+      <Filter>Source Files\Lib\json</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
