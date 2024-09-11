@@ -142,6 +142,7 @@
     <ClCompile Include="src\DbModule\DbModule.cpp" />
     <ClCompile Include="src\DbModule\InstanceModule\InstanceModule.cpp" />
     <ClCompile Include="src\DbModule\MigrationModule\MigrationModule.cpp" />
+    <ClCompile Include="src\LogPooler\LogPooler.cpp" />
     <ClCompile Include="src\MainModule\MainModule.cpp" />
     <ClCompile Include="src\ProcessModule\ProcessModule.cpp" />
     <ClCompile Include="src\ServerManager.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="src\InputModule.h" />
     <ClInclude Include="src\Lib\color-console\color.hpp" />
     <ClInclude Include="src\Lib\json\json.hpp" />
+    <ClInclude Include="src\LogPooler\LogPooler.h" />
     <ClInclude Include="src\MainModule\MainModule.h" />
     <ClInclude Include="src\ProcessModule\ProcessModule.h" />
     <ClInclude Include="src\Util\Util.h" />

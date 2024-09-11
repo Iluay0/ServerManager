@@ -23,6 +23,10 @@
 #include <functional>
 #include <filesystem>
 #include <ranges>
+#include <regex>
+#include <thread>
+#include <future>
+#include <chrono>
 
 #include <color.hpp>
 #include <json.hpp>
@@ -36,6 +40,14 @@ constexpr auto migrationDateFormat = "%Y-%m-%d-%H%M%S";
 
 namespace util
 {
+	struct LogPoolerConfig
+	{
+		bool m_enabled = false;
+		std::deque<std::string> m_folders;
+		std::string m_regexFileName = "";
+		std::string m_regexExeName = "";
+	};
+
 	class Config
 	{
 	public:
@@ -75,6 +87,17 @@ namespace util
 						m_copyPaths.push_back({ el["from"].get<std::string>(), el["to"].get<std::string>() });
 					}
 				}
+
+				if (json.contains("logPooler"))
+				{
+					m_logPoolerConfig.m_enabled = json["logPooler"]["enabled"].get<bool>();
+					for (const auto& el : json["logPooler"]["folders"])
+					{
+						m_logPoolerConfig.m_folders.push_back(el.get<std::string>());
+					}
+					m_logPoolerConfig.m_regexFileName = json["logPooler"]["regexFileName"].get<std::string>();
+					m_logPoolerConfig.m_regexExeName = json["logPooler"]["regexExeName"].get<std::string>();
+				}
 			}
 			catch (nlohmann::json::exception e)
 			{
@@ -82,6 +105,7 @@ namespace util
 			}
 		}
 
+		LogPoolerConfig& getLogPoolerConfig() { return m_logPoolerConfig; }
 		std::string getDbInstanceName() { return m_dbInstanceName; }
 		const std::deque<std::pair<std::string, std::string>>& getExePaths() { return m_exePaths; }
 		const std::deque<std::pair<std::string, std::string>>& getCopyPaths() { return m_copyPaths; }
@@ -95,6 +119,7 @@ namespace util
 		std::string m_dbInstanceName = "";
 		std::deque<std::pair<std::string, std::string>> m_exePaths;
 		std::deque<std::pair<std::string, std::string>> m_copyPaths;
+		LogPoolerConfig m_logPoolerConfig;
 	};
 
 	template <typename T>
@@ -144,5 +169,25 @@ namespace util
 		}
 
 		return sortedSet;
+	}
+
+	inline std::ifstream openFileAtLine(const std::string& filename, uint32_t lineNumber)
+	{
+		std::ifstream file(filename);
+
+		if (!file.is_open())
+			return file;
+
+		std::string line;
+		for (uint32_t i = 1; i < lineNumber; i++)
+		{
+			if (!std::getline(file, line))
+			{
+				file.close();
+				return std::ifstream();
+			}
+		}
+
+		return file;
 	}
 }

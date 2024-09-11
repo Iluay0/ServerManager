@@ -40,5 +40,14 @@
 			"from": "../../Source/bin/WorldServer.exe",
 			"to": "../Program/WorldServer.exe"
 		}
-	]
+	],
+	"logPooler": {
+		"enabled": true,
+		"folders": [
+			"../ServerLog",
+			"../Resource/Log"
+		],
+		"regexFileName": "^[^_-]+_Y-m-d.txt",
+		"regexExeName": "^[^_-]+"
+	}
 }
