@@ -79,6 +79,8 @@ void LogPooler::printLog(std::string log)
 		std::cout << dye::light_red(log);
 	else if (log.find("(Warn)") != std::string::npos)
 		std::cout << dye::yellow(log);
+	else if (log.find("(CommandFeedback)") != std::string::npos)
+		std::cout << dye::light_blue(log);
 	else
 		std::cout << dye::grey(log);
 

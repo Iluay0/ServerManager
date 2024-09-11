@@ -25,8 +25,31 @@ BOOL WINAPI ctrlHandler(DWORD fdwCtrlType)
     return TRUE;
 }
 
+// This is used by Chronicles of Madrigal to handle slash commands.
+// Parse the file if you wish to use it for your own WorldServer.
+bool onCommand(std::string command)
+{
+    std::string filename = util::Config::inst().getSlashCommandsFileName();
+    if (filename == "")
+        return true;
+
+    std::ofstream file(filename, std::fstream::app);
+    if (!file.is_open())
+    {
+        std::cout << std::format("Could not open file {}", filename) << std::endl;
+        return true;
+    }
+
+    file << command << std::endl;
+    file.close();
+    return true;
+}
+
 bool onInput(std::string input)
 {
+    if (input.starts_with("/"))
+        return onCommand(input);
+
     if (m_MainModule->onInput(input))
         return true;
 
@@ -68,7 +91,7 @@ int main()
     {
         auto f = std::async(std::launch::async, [] {
             auto s = ""s;
-            if (std::cin >> s) return s;
+            if (std::getline(std::cin, s)) return s;
         });
 
         while (f.wait_for(100ms) != std::future_status::ready)
@@ -81,8 +104,8 @@ int main()
             module->setInterrupt(false);
         }
 
-        std::string szInput = f.get();
-        if (szInput != "" && !onInput(szInput))
+        std::string input = f.get();
+        if (input != "" && !onInput(input))
             std::cout << dye::light_red("Unrecognized command.") << std::endl;
 
         for (auto& [name, module] : m_MainModule->getModules())
@@ -94,8 +117,6 @@ int main()
         {
             std::cin.clear();
         }
-
-        std::cout << std::endl << "Waiting for input..." << std::endl;
     }
 
     for (auto& [name, module] : m_MainModule->getModules())
