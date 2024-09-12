@@ -148,6 +148,7 @@
     <ClCompile Include="src\ServerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\DbModule\DbModule.h" />
     <ClInclude Include="src\DbModule\InstanceModule\InstanceModule.h" />
     <ClInclude Include="src\DbModule\MigrationModule\MigrationModule.h" />
@@ -158,6 +159,12 @@
     <ClInclude Include="src\MainModule\MainModule.h" />
     <ClInclude Include="src\ProcessModule\ProcessModule.h" />
     <ClInclude Include="src\Util\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ServerManager.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ServerManager.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

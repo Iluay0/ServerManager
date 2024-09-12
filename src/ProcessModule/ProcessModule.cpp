@@ -62,7 +62,7 @@ void ProcessModule::start(std::deque<std::string> args)
         si.cb = sizeof(si);
 
         std::string fullPath = std::format("{}\\{}", path, exeName);
-        if (!CreateProcessA(fullPath.c_str(), NULL, NULL, NULL, TRUE, 0, NULL, path.c_str(), &si, &pi))
+        if (!CreateProcessA(fullPath.c_str(), NULL, NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, path.c_str(), &si, &pi))
         {
             std::cout << "[" << dye::light_red("KO") << "]" << std::endl;
             CloseHandle(pi.hProcess);
@@ -90,6 +90,7 @@ void ProcessModule::start(std::deque<std::string> args)
         PostMessage(hWnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
 
         std::cout << "[" << dye::light_green("OK") << "]" << std::endl;
+        std::this_thread::sleep_for(100ms);
     }
 }
 
