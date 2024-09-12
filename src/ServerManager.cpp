@@ -25,31 +25,8 @@ BOOL WINAPI ctrlHandler(DWORD fdwCtrlType)
     return TRUE;
 }
 
-// This is used by Chronicles of Madrigal to handle slash commands.
-// Parse the file if you wish to use it for your own WorldServer.
-bool onCommand(std::string command)
-{
-    std::string filename = util::Config::inst().getSlashCommandsFileName();
-    if (filename == "")
-        return true;
-
-    std::ofstream file(filename, std::fstream::app);
-    if (!file.is_open())
-    {
-        std::cout << std::format("Could not open file {}", filename) << std::endl;
-        return true;
-    }
-
-    file << command << std::endl;
-    file.close();
-    return true;
-}
-
 bool onInput(std::string input)
 {
-    if (input.starts_with("/"))
-        return onCommand(input);
-
     if (m_MainModule->onInput(input))
         return true;
 

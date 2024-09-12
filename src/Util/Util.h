@@ -68,7 +68,6 @@ namespace util
 				auto json = nlohmann::ordered_json::parse(file);
 
 				m_dbInstanceName = json.value("dbInstanceName", "");
-				m_slashCommandsFileName = json.value("slashCommandsFile", "");
 
 				if (json.contains("executables"))
 				{
@@ -108,7 +107,6 @@ namespace util
 
 		LogPoolerConfig& getLogPoolerConfig() { return m_logPoolerConfig; }
 		std::string getDbInstanceName() { return m_dbInstanceName; }
-		std::string getSlashCommandsFileName() { return m_slashCommandsFileName; }
 		const std::deque<std::pair<std::string, std::string>>& getExePaths() { return m_exePaths; }
 		const std::deque<std::pair<std::string, std::string>>& getCopyPaths() { return m_copyPaths; }
 
@@ -119,7 +117,6 @@ namespace util
 		}
 	private:
 		std::string m_dbInstanceName = "";
-		std::string m_slashCommandsFileName = "";
 		std::deque<std::pair<std::string, std::string>> m_exePaths;
 		std::deque<std::pair<std::string, std::string>> m_copyPaths;
 		LogPoolerConfig m_logPoolerConfig;
