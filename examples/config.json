@@ -1,6 +1,6 @@
 {
     "dbInstanceName": ".\\SQLEXPRESS",
-	"slashCommandsFile": "",
+	"startCheckMethod": "window",
     "executables": {
         "../Program": [
             "AccountServer.exe",

@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <Psapi.h>
 #include <codecvt>
+#include "../LogPooler/LogPooler.h"
 
 HWND g_hWnd = nullptr;
 
@@ -61,7 +62,16 @@ void ProcessModule::start(std::deque<std::string> args)
         ZeroMemory(&pi, sizeof(pi));
         si.cb = sizeof(si);
 
+        auto startCheckMethod = util::Config::inst().getStartCheckMethod();
         std::string fullPath = std::format("{}\\{}", path, exeName);
+        std::string bootFileName = std::format("{}.boot", fullPath);
+
+        if (startCheckMethod == util::StartCheckMethod::File)
+        {
+            std::ofstream ofs(bootFileName);
+            ofs.close();
+        }
+
         if (!CreateProcessA(fullPath.c_str(), NULL, NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, path.c_str(), &si, &pi))
         {
             std::cout << "[" << dye::light_red("KO") << "]" << std::endl;
@@ -70,6 +80,7 @@ void ProcessModule::start(std::deque<std::string> args)
             break;
         }
 
+        std::cout << std::endl;
         m_processes.push_front({ pi.dwProcessId, exeName });
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
@@ -79,18 +90,28 @@ void ProcessModule::start(std::deque<std::string> args)
         {
             hWnd = getOpenProcess(pi.dwProcessId);
             if (hWnd != nullptr)
-                break;
+            {
+                if (startCheckMethod == util::StartCheckMethod::Window)
+                    break;
+
+                if (startCheckMethod == util::StartCheckMethod::File)
+                {
+                    if (!std::filesystem::exists(bootFileName))
+                        break;
+                }
+            }         
 
             if (isInterrupt())
                 return;
 
-            std::this_thread::sleep_for(100ms);
+            std::this_thread::sleep_for(10ms);
+            LogPooler::inst().process();
         }
 
         PostMessage(hWnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
 
         std::cout << "[" << dye::light_green("OK") << "]" << std::endl;
-        std::this_thread::sleep_for(100ms);
+        std::this_thread::sleep_for(10ms);
     }
 }
 

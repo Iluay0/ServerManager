@@ -48,6 +48,12 @@ namespace util
 		std::string m_regexExeName = "";
 	};
 
+	enum StartCheckMethod
+	{
+		File,
+		Window
+	};
+
 	class Config
 	{
 	public:
@@ -68,6 +74,7 @@ namespace util
 				auto json = nlohmann::ordered_json::parse(file);
 
 				m_dbInstanceName = json.value("dbInstanceName", "");
+				m_startCheckMethod = stringToStartCheckMethod(json.value("startCheckMethod", ""));
 
 				if (json.contains("executables"))
 				{
@@ -106,6 +113,7 @@ namespace util
 		}
 
 		LogPoolerConfig& getLogPoolerConfig() { return m_logPoolerConfig; }
+		StartCheckMethod getStartCheckMethod() { return m_startCheckMethod; }
 		std::string getDbInstanceName() { return m_dbInstanceName; }
 		const std::deque<std::pair<std::string, std::string>>& getExePaths() { return m_exePaths; }
 		const std::deque<std::pair<std::string, std::string>>& getCopyPaths() { return m_copyPaths; }
@@ -116,7 +124,15 @@ namespace util
 			return instance;
 		}
 	private:
+		static StartCheckMethod stringToStartCheckMethod(std::string str)
+		{
+			if (str == "window")
+				return StartCheckMethod::Window;
+			return StartCheckMethod::File;
+		}
+	private:
 		std::string m_dbInstanceName = "";
+		StartCheckMethod m_startCheckMethod = StartCheckMethod::File;
 		std::deque<std::pair<std::string, std::string>> m_exePaths;
 		std::deque<std::pair<std::string, std::string>> m_copyPaths;
 		LogPoolerConfig m_logPoolerConfig;
