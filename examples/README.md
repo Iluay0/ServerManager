@@ -16,11 +16,8 @@ void OnAfterInitInstance()
 {
 	char buf[MAX_PATH];
 	GetModuleFileNameA(nullptr, buf, MAX_PATH);
-	std::string szFullName = PathFindFileName(buf);
-	size_t nLastIndex = szFullName.find_last_of(".");
-	std::string szRawName = szFullName.substr(0, nLastIndex);
 
-	std::string bootFileName = std::format("{}.exe.boot", szRawName);
+	std::string bootFileName = std::format("{}.boot", buf);
 	if (std::filesystem::exists(bootFileName))
 		std::filesystem::remove(bootFileName);
 }
