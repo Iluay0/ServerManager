@@ -32,13 +32,13 @@ void LogPooler::process()
 
 	for (const auto& folder : config.m_folders)
 	{
+		if (!std::filesystem::exists(folder))
+			continue;
+
 		for (const auto& it : std::filesystem::recursive_directory_iterator(folder))
 		{
 			if (it.is_directory())
 				continue;
-
-			auto system_time = std::chrono::clock_cast<std::chrono::system_clock>(it.last_write_time());
-			std::time_t lastEditTime = std::chrono::system_clock::to_time_t(system_time);
 
 			std::smatch matchFileName;
 			std::string filename = it.path().filename().string();
@@ -48,6 +48,10 @@ void LogPooler::process()
 			std::smatch matchExeName;
 			if (!std::regex_search(filename, matchExeName, std::regex(config.m_regexExeName)))
 				continue;
+
+			auto lastWriteTime = it.last_write_time();
+			auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(lastWriteTime - std::filesystem::file_time_type::clock::now() + std::chrono::system_clock::now());
+			std::time_t lastEditTime = std::chrono::system_clock::to_time_t(sctp);
 
 			if (!m_mapLastScannedLine.count(filename))
 				m_mapLastScannedLine[filename] = 0;
